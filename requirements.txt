@@ -1,0 +1,5 @@
+django_ratelimit
+django_chunked_upload
+Django
+sorl-thumbnail
+pillow
