@@ -1,4 +1,6 @@
 Django
 helpers
-django-ratelimit2
+django-ratelimit
 django-chunked-upload
+sorl-thumbnail
+pillow

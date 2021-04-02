@@ -20,5 +20,5 @@
     <option name="jreName" value="12" />
     <option name="vmOptions" value="-DarchetypeCatalog=internal" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Ubuntu" project-jdk-type="Python SDK" />
 </project>
