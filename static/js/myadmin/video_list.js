@@ -1,10 +1,11 @@
+
 // 写入csrf
 $.getScript("/static/js/csrftoken.js");
 
 // 删除
 $(".video-list").on("click", ".video-delete", function () {
-    const tr = $(this).closest("tr");
-    const video_id = $(tr).attr("video-id");
+    var tr = $(this).closest("tr");
+    var video_id = $(tr).attr("video-id");
     $('.ui.tiny.modal.delete')
         .modal({
             closable: true,
@@ -23,8 +24,8 @@ $(".video-list").on("click", ".video-delete", function () {
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
-                        const code = data.code;
-                        const msg = data.msg;
+                        var code = data.code
+                        var msg = data.msg
                         if (code == 0) {
                             window.location.reload();
                         } else {

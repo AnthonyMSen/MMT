@@ -4,13 +4,13 @@
 $(function () {
 
 
-    let md5 = "",
-        lastprogress = 0,
-        csrf = $("input[name='csrfmiddlewaretoken']")[0].value,
-        form_data = [{"name": "csrfmiddlewaretoken", "value": csrf}];
+var md5 = "",
+    lastprogress = 0,
+    csrf = $("input[name='csrfmiddlewaretoken']")[0].value,
+    form_data = [{"name": "csrfmiddlewaretoken", "value": csrf}];
 
     function calculate_md5(file, chunk_size) {
-        let slice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
+        var slice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
             chunks = chunks = Math.ceil(file.size / chunk_size),
             current_chunk = 0,
             spark = new SparkMD5.ArrayBuffer();
@@ -26,9 +26,9 @@ $(function () {
         }
 
         function read_next_chunk() {
-            const reader = new FileReader();
+            var reader = new FileReader();
             reader.onload = onload;
-            const start = current_chunk * chunk_size,
+            var start = current_chunk * chunk_size,
                 end = Math.min(start + chunk_size, file.size);
             reader.readAsArrayBuffer(slice.call(file, start, end));
         }
@@ -42,8 +42,8 @@ $(function () {
         maxChunkSize: 100000, // Chunks of 100 kB
         formData: form_data,
         add: function (e, data) { // Called before starting upload
-            const fileSize = data.originalFiles[0]['size'];
-            const type = data.originalFiles[0]['type'];
+            var fileSize = data.originalFiles[0]['size'];
+            var type = data.originalFiles[0]['type'];
             console.log('file size --> ' + fileSize);
             console.log('type --> ' + type);
 
@@ -73,7 +73,7 @@ $(function () {
                     {"name": "upload_id", "value": data.result.upload_id}
                 );
             }
-            const progress = parseInt(data.loaded / data.total * 100.0, 10);
+            var progress = parseInt(data.loaded / data.total * 100.0, 10);
             console.log(progress);
             if (progress > lastprogress) {
                 lastprogress = progress

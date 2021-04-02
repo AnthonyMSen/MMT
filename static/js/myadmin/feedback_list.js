@@ -1,9 +1,10 @@
+
 // 写入csrf
 $.getScript("/static/js/csrftoken.js");
 
 $('.feedback-delete').click(function () {
-    const tr = $(this).closest("tr");
-    const feedback_id = $(tr).attr("feedback-id");
+    var tr = $(this).closest("tr");
+    var feedback_id = $(tr).attr("feedback-id");
     $('.ui.tiny.modal.delete')
         .modal({
             closable: true,
@@ -22,8 +23,8 @@ $('.feedback-delete').click(function () {
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
-                        const code = data.code;
-                        const msg = data.msg;
+                        var code = data.code
+                        var msg = data.msg
                         if (code == 0) {
                             window.location.reload();
                         } else {

@@ -1,9 +1,10 @@
+
 // 写入csrf
 $.getScript("/static/js/csrftoken.js");
 
 $('.classification-delete').click(function () {
-    const tr = $(this).closest("tr");
-    const classification_id = $(tr).attr("classification-id");
+    var tr = $(this).closest("tr");
+    var classification_id = $(tr).attr("classification-id");
     $('.ui.tiny.modal.delete')
         .modal({
             closable: true,
@@ -22,8 +23,8 @@ $('.classification-delete').click(function () {
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
-                        const code = data.code;
-                        const msg = data.msg;
+                        var code = data.code
+                        var msg = data.msg
                         if (code == 0) {
                             window.location.reload();
                         } else {

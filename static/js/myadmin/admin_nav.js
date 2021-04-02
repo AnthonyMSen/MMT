@@ -1,5 +1,5 @@
 $(function () {
-    const pathname = window.location.pathname;
+    var pathname = window.location.pathname;
     console.log(pathname);
     if (pathname.endsWith("myadmin/")) {
         $("#index").addClass("active");

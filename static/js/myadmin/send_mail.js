@@ -1,9 +1,10 @@
+
 // 写入csrf
 $.getScript("/static/js/csrftoken.js");
 
 $('#send-mail').click(function () {
 
-    const video_id = $('.selection.dropdown').dropdown('get value');
+    var video_id = $('.selection.dropdown').dropdown('get value');
 
     if (video_id == '') {
         alert("不能为空");
@@ -20,8 +21,8 @@ $('#send-mail').click(function () {
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            const code = data.code;
-            const msg = data.msg;
+            var code = data.code
+            var msg = data.msg
             if (code == 0) {
                 $('#send-mail-progress').text('发送成功')
             } else {
