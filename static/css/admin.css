@@ -1,22 +1,24 @@
 body {
-    display: relative;
+    position: relative;
+    display: inline;
 }
 
-.n{
-    display:none;
+.n {
+    display: none;
 }
 
-#logo{
+#logo {
     margin-right: 16px;
 }
+
 #sidebar {
     position: fixed;
-    top: 51.8px;
+    top: 52px;
     left: 0;
     bottom: 0;
     width: 18%;
     background-color: #f5f5f5;
-    padding: 0px;
+    padding: 0;
 }
 
 #sidebar .ui.menu {
@@ -42,7 +44,7 @@ body {
 
 #content {
     margin-left: 19%;
-    width: 81%; 
+    width: 81%;
     margin-top: 3em;
     padding-left: 3em;
     float: left;
@@ -69,27 +71,28 @@ body {
     border-bottom: 2px solid #eee !important;
 }
 
-.v-title-extra{ 
-    text-align: right;   
+.v-title-extra {
+    text-align: right;
 }
 
-.v-admin-search{ 
+.v-admin-search {
     width: 50%;
 }
 
-#progress_layout{
-    margin-top:2rem;
+#progress_layout {
+    margin-top: 2rem;
 }
 
 .v-form-wrap {
-     width: 600px;
-}
-.v-form-wrap .form{
-    margin:2rem auto;
+    width: 600px;
 }
 
-.v-form-field{
-    padding-top:1em;
-    padding-bottom:1em;
-    vertical-align:middle;
+.v-form-wrap .form {
+    margin: 2rem auto;
+}
+
+.v-form-field {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    vertical-align: middle;
 }

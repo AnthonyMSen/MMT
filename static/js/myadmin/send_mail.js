@@ -1,12 +1,11 @@
-
 // 写入csrf
 $.getScript("/static/js/csrftoken.js");
 
-$('#send-mail').click(function(){
+$('#send-mail').click(function () {
 
-    var video_id = $('.selection.dropdown').dropdown('get value');
+    const video_id = $('.selection.dropdown').dropdown('get value');
 
-    if(video_id == ''){
+    if (video_id == '') {
         alert("不能为空");
         return;
     }
@@ -14,24 +13,24 @@ $('#send-mail').click(function(){
     $.ajax({
         url: api_send_mail,
         data: {
-            'video_id':video_id,
+            'video_id': video_id,
             'csrf_token': csrftoken
         },
         type: 'POST',
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            var code = data.code
-            var msg = data.msg
-            if(code == 0){
+            const code = data.code;
+            const msg = data.msg;
+            if (code == 0) {
                 $('#send-mail-progress').text('发送成功')
-            }else{
+            } else {
                 $('#send-mail-progress').text(msg)
             }
 
         },
-        error: function(data){
-          $('#send-mail-progress').text('发送失败')
+        error: function (data) {
+            $('#send-mail-progress').text('发送失败')
         }
     });
 });

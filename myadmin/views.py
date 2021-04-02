@@ -1,7 +1,7 @@
+import datetime
 import logging
 import smtplib
 
-import datetime
 from chunked_upload.views import ChunkedUploadView, ChunkedUploadCompleteView
 from django.conf import settings
 from django.contrib import messages
@@ -22,6 +22,7 @@ from .forms import UserLoginForm, VideoPublishForm, VideoEditForm, UserAddForm, 
 from .models import MyChunkedUpload
 
 logger = logging.getLogger('my_logger')
+
 
 def login(request):
     if request.method == 'POST':
@@ -98,7 +99,7 @@ class VideoPublishView(SuperUserRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super(VideoPublishView, self).get_context_data(**kwargs)
         clf_list = Classification.objects.all().values()
-        clf_data = {'clf_list':clf_list}
+        clf_data = {'clf_list': clf_list}
         context.update(clf_data)
         return context
 
@@ -118,7 +119,7 @@ class VideoEditView(SuperUserRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super(VideoEditView, self).get_context_data(**kwargs)
         clf_list = Classification.objects.all().values()
-        clf_data = {'clf_list':clf_list}
+        clf_data = {'clf_list': clf_list}
         context.update(clf_data)
         return context
 
@@ -308,19 +309,21 @@ def user_delete(request):
 
 class SubscribeView(SuperUserRequiredMixin, generic.View):
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         video_list = Video.objects.get_published_list()
-        return render(request, "myadmin/subscribe.html" ,{'video_list':video_list})
+        return render(request, "myadmin/subscribe.html", {'video_list': video_list})
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         if not request.user.is_superuser:
             return JsonResponse({"code": 1, "msg": "无权限"})
         video_id = request.POST['video_id']
         video = Video.objects.get(id=video_id)
         subject = video.title
-        context = {'video': video,'site_url':settings.SITE_URL}
+        context = {'video': video, 'site_url': settings.SITE_URL}
         html_message = render_to_string('myadmin/mail_template.html', context)
-        email_list = User.objects.filter(subscribe=True).values_list('email',flat=True)
+        email_list = User.objects.filter(subscribe=True).values_list('email', flat=True)
         # 分组
         email_list = [email_list[i:i + 2] for i in range(0, len(email_list), 2)]
 
@@ -366,4 +369,3 @@ def feedback_delete(request):
     instance = Feedback.objects.get(id=feedback_id)
     instance.delete()
     return JsonResponse({"code": 0, "msg": "success"})
-

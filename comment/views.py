@@ -11,7 +11,7 @@ from video.models import Video
 
 
 @ratelimit(key='ip', rate='2/m')
-def submit_comment(request,pk):
+def submit_comment(request, pk):
     """
     每分钟限制发2条
     """
@@ -19,7 +19,7 @@ def submit_comment(request,pk):
     if was_limited:
         return JsonResponse({"code": 1, 'msg': '评论太频繁了，请1分钟后再试'})
         pass
-    video = get_object_or_404(Video, pk = pk)
+    video = get_object_or_404(Video, pk=pk)
     form = CommentForm(data=request.POST)
 
     if form.is_valid():
@@ -43,8 +43,8 @@ def submit_comment(request,pk):
         html = render_to_string(
             "comment/comment_single.html", {"comments": comments})
 
-        return JsonResponse({"code":0,"html": html})
-    return JsonResponse({"code":1,'msg':'评论失败!'})
+        return JsonResponse({"code": 0, "html": html})
+    return JsonResponse({"code": 1, 'msg': '评论失败!'})
 
 
 def get_comments(request):
@@ -74,7 +74,7 @@ def get_comments(request):
         html = ""
 
     return JsonResponse({
-        "code":code,
+        "code": code,
         "html": html,
         "comment_count": comment_count
     })
