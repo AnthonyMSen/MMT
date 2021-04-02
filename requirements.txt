@@ -3,4 +3,4 @@ helpers
 django-ratelimit
 django-chunked-upload
 sorl-thumbnail
-pillow
+Pillow
