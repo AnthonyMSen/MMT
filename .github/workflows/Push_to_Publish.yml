@@ -1,0 +1,16 @@
+name: Push to Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v2
+
+    - name: Run shell
+      run: |
+        sh $GITHUB_WORKSPACE/clean_code.sh
