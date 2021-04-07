@@ -9,11 +9,13 @@ RUN set -ex \
   && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
   && echo "Asia/Shanghai" > /etc/timezone
 
-RUN mkdir /MMT \
-  && git clone https://github.com/AnthonyMSen/MMT.git /MMT \
-  && cd /MMT \
+RUN git clone https://github.com/AnthonyMSen/MMT.git /MMT
+
+RUN cd /MMT \
   && git checkout master \
-  && pip3 install --no-cache-dir -r /MMT/requirements.txt \
+  && pip3 install --no-cache-dir -r /MMT/requirements.txt
+
+RUN cd /MMT \
   && python3 manage.py migrate \
   && python3 manage.py makemigrations \
   && python3 manage.py migrate
