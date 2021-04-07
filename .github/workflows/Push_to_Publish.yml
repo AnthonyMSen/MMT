@@ -36,3 +36,4 @@ jobs:
         with:
           repository: AnthonyMSen/MMT
           github_token: ${{ secrets.PUSH_TOKEN }}
+          force: true
