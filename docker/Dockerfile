@@ -9,7 +9,7 @@ RUN set -ex \
   && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
   && echo "Asia/Shanghai" > /etc/timezone
 
-RUN mkdir /MMT
+RUN mkdir /MMT \
   && git clone https://github.com/AnthonyMSen/MMT.git /MMT \
   && cd /MMT \
   && git checkout master \
