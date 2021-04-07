@@ -9,16 +9,14 @@ RUN set -ex \
   && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
   && echo "Asia/Shanghai" > /etc/timezone
 
-RUN git clone https://github.com/AnthonyMSen/MMT.git /MMT
-
-RUN cd /MMT \
+RUN git clone https://github.com/AnthonyMSen/MMT.git /MMT \
+  && cd /MMT \
   && git checkout master \
-  && pip3 install --no-cache-dir -r /MMT/requirements.txt
-
-RUN cd /MMT \
+  && pip3 install -r /MMT/requirements.txt \
   && python3 manage.py migrate \
   && python3 manage.py makemigrations \
-  && python3 manage.py migrate
+  && python3 manage.py migrate \
+  && rm -r ~/.cache
 
 COPY ./docker/docker_entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/docker_entrypoint.sh
