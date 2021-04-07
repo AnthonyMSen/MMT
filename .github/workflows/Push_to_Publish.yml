@@ -3,9 +3,6 @@ name: Push to Publish
 on:
   workflow_dispatch:
 
-env:
-  SSH_PRIVATE_KEY: ${{ secrets.RSA_PRIVATE_KEY }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,9 +11,23 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Run Docker
-        uses: docker://alpine
-        with:
-          entrypoint: /bin/sh
-          args: curl https://api.day.app/seHy8Styec4YKxvFBtqBte/我运行啦！
+      - name: Commit
+        run: |
+          rm $GITHUB_WORKSPACE/.github/workflows/Push_to_Publish.yml
+          rm -r $GITHUB_WORKSPACE/.idea
+          rm -r $GITHUB_WORKSPACE/.git
+          rm $GITHUB_WORKSPACE/db.sqlite3
+          sed -i '/ALLOWED_HOSTS/d' $GITHUB_WORKSPACE/MeidaManageTool/settings.py
+          sed -i '/EMAIL_USE_SSL/d' $GITHUB_WORKSPACE/MeidaManageTool/settings.py
+          sed -i '/EMAIL_HOST/d' $GITHUB_WORKSPACE/MeidaManageTool/settings.py
+          sed -i '/EMAIL_PORT/d' $GITHUB_WORKSPACE/MeidaManageTool/settings.py
+          git config --global user.email 1072519956@qq.com
+          git config --global user.name Anthony_Actions
+          git add .
+          git commit -m "update" -a
 
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          repository: MMT
+          github_token: ${{ secrets.GITHUB_TOKEN }}
