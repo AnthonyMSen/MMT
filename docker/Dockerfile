@@ -14,8 +14,7 @@ RUN git clone https://github.com/AnthonyMSen/MMT.git /MMT \
   && pip3 install --no-cache-dir -r /MMT/requirements.txt \
   && python3 manage.py migrate \
   && python3 manage.py makemigrations \
-  && python3 manage.py migrate \
-  && rm -r ~/.cache
+  && python3 manage.py migrate
 
 COPY ./docker/docker_entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/docker_entrypoint.sh
