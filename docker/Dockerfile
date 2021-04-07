@@ -11,7 +11,6 @@ RUN set -ex \
 
 RUN git clone https://github.com/AnthonyMSen/MMT.git /MMT \
   && cd /MMT \
-  && git checkout master \
   && pip3 install -r /MMT/requirements.txt \
   && python3 manage.py migrate \
   && python3 manage.py makemigrations \
