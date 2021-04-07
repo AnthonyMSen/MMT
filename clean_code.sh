@@ -1,5 +1,8 @@
 #!/bin/sh
 
+git config --global user.email 1072519956@qq.com
+git config --global user.name Anthony-GithubActions
+
 mkdir -p ~/.ssh/
 echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
 
