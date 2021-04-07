@@ -13,6 +13,7 @@ jobs:
 
       - name: Commit
         run: |
+          cd $GITHUB_WORKSPACE
           rm $GITHUB_WORKSPACE/.github/workflows/Push_to_Publish.yml
           rm -r $GITHUB_WORKSPACE/.idea
           rm -r $GITHUB_WORKSPACE/.git
