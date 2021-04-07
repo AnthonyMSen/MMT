@@ -109,7 +109,7 @@ python3 manage.py migrate # 正式创建
 ```shell
 # ${LOCAL_IP} 为运行机ip地址，可以为'0.0.0.0'
 # ${WEB_PORT} 为网页端口,默认8000
-python3 -u /MMT/manage.py runserver ${LOCAL_IP}:${WEB_PORT}
+python3 -u manage.py runserver ${LOCAL_IP}:${WEB_PORT}
 ```
 
 - 打开网页
