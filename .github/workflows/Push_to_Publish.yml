@@ -16,7 +16,6 @@ jobs:
           cd $GITHUB_WORKSPACE
           rm $GITHUB_WORKSPACE/.github/workflows/Push_to_Publish.yml
           rm -r $GITHUB_WORKSPACE/.idea
-          rm -r $GITHUB_WORKSPACE/.git
           rm $GITHUB_WORKSPACE/db.sqlite3
           sed -i '/ALLOWED_HOSTS/d' $GITHUB_WORKSPACE/MeidaManageTool/settings.py
           sed -i '/EMAIL_USE_SSL/d' $GITHUB_WORKSPACE/MeidaManageTool/settings.py
