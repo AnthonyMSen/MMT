@@ -29,5 +29,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          repository: MMT
+          repository: AnthonyMSen/MMT
           github_token: ${{ secrets.PUSH_TOKEN }}
