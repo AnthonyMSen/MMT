@@ -6,13 +6,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    steps:
-    - name: Check out Git repository
-      uses: actions/checkout@v2
 
-    - name: Run shell
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.RSA_PRIVATE_KEY }}
-      run:
-        sh $GITHUB_WORKSPACE/clean_code.sh
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Run shell
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.RSA_PRIVATE_KEY }}
+        run:
+          git config --global user.email 1072519956@qq.com
+          git config --global user.name Anthony-GithubActions
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          mkdir /MMT
+          cd ~
+          git clone git@github.com:AnthonyMSen/MMT.git /MMT
+          cp -rf $GITHUB_WORKSPACE/* /MMT
+          rm clean_code.sh db.sqlite3
+          sed -i '/ALLOWED_HOSTS/d' /MMT/MeidaManageTool/settings.py
+          sed -i '/EMAIL_USE_SSL/d' /MMT/MeidaManageTool/settings.py
+          sed -i '/EMAIL_HOST/d' /MMT/MeidaManageTool/settings.py
+          sed -i '/EMAIL_PORT/d' /MMT/MeidaManageTool/settings.py
+          git add .
+          git commit -m "auto-update"
+          git pull --rebase origin
+          git push -u origin
+
+
+
