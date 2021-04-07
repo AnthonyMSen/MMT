@@ -1,5 +1,9 @@
 #!/bin/sh
 set -e
+sed -i '/ALLOWED_HOSTS/d' /MMT/MeidaManageTool/settings.py
+sed -i '/EMAIL_USE_SSL/d' /MMT/MeidaManageTool/settings.py
+sed -i '/EMAIL_HOST/d' /MMT/MeidaManageTool/settings.py
+sed -i '/EMAIL_PORT/d' /MMT/MeidaManageTool/settings.py
 echo "ALLOWED_HOSTS = ${ALLOWED_HOSTS}" >> /MMT/MeidaManageTool/settings.py
 echo "EMAIL_USE_SSL = ${EMAIL_USE_SSL}" >> /MMT/MeidaManageTool/settings.py
 echo "EMAIL_HOST = ${EMAIL_HOST}" >> /MMT/MeidaManageTool/settings.py
