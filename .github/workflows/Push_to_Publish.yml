@@ -119,7 +119,7 @@ jobs:
           dry-run: false
 
   sync_to_tencent:
-    needs: build_docker
+    needs: sync_to_aliyun
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
