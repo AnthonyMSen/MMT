@@ -68,6 +68,7 @@ services:
 docker create \
 --name=MMT \
 -p 8009:8009 \
+-e WEB_PORT=8009 \
 -e LOCAL_IP=0.0.0.0 \
 -e ALLOWED_HOSTS=[<参考上下文>] \
 -e EMAIL_USE_SSL=True \
