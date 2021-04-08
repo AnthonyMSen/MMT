@@ -39,12 +39,15 @@ ip:[端口号]/myadmin
 
 #### docker-compose部署【推荐】
 
+- 注：原始镜像部署在DockerHub中的`anthonymsen/mmt`，因网络原因下载速度慢，现在同步更新阿里云镜像`registry.cn-chengdu.aliyuncs.com/anthonymsen/mmt`，复制替换即可
+
 ```yml
 version: "2.1"
 
 services:
   mmt:
     image: anthonymsen/mmt
+#    image: registry.cn-chengdu.aliyuncs.com/anthonymsen/mmt
     container_name: mmt
     ports:
       - 8009:8009
