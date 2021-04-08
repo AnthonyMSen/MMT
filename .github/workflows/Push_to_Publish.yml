@@ -84,3 +84,31 @@ jobs:
           push: true
           tags: |
             anthonymsen/mmt:latest
+
+  dockerhub-mirror-aliyun:
+    needs: build_docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync From Docker Hub to Aliyun
+        uses: onichandame/docker-registry-sync-action@master
+        with:
+          source_repository: docker.io/anthonymsen/mmt:latest
+          source_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          source_password: ${{ secrets.DOCKERHUB_TOKEN }}
+          target_repository: registry.cn-chengdu.aliyuncs.com/anthonymsen/mmt:latest
+          target_username: ${{ secrets.ALI_USERNAME }}
+          target_password: ${{ secrets.ALI_PASSWORD }}
+
+  dockerhub-mirror-tencent:
+    needs: build_docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync From Docker Hub to Tencent
+        uses: onichandame/docker-registry-sync-action@master
+        with:
+          source_repository: docker.io/anthonymsen/mmt:latest
+          source_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          source_password: ${{ secrets.DOCKERHUB_TOKEN }}
+          target_repository: ccr.ccs.tencentyun.com/anthonymsen/mmt:latest
+          target_username: ${{ secrets.TX_USERNAME }}
+          target_password: ${{ secrets.TX_PASSWORD }}
