@@ -30,7 +30,6 @@ jobs:
           git config --global user.name Anthony_Actions
           git add .
           git commit -m "update" -a
-
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -116,5 +115,38 @@ jobs:
           dockerhub-password: ${{ secrets.DOCKERHUB_TOKEN }}
           dockerhub-repo: anthonymsen/mmt
           dest-registry: registry.cn-chengdu.aliyuncs.com
+          dest-repo: anthonymsen/mmt
+          dry-run: false
+
+  sync_to_tencent:
+    needs: build_docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to Tencent
+        uses: docker/login-action@v1
+        with:
+          registry: ccr.ccs.tencentyun.com
+          username: ${{ secrets.TX_USERNAME }}
+          password: ${{ secrets.TX_PASSWORD }}
+
+      - name: Mirror DockerHub to Tencent
+        uses: crazy-max/ghaction-dockerhub-mirror@v1
+        with:
+          dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub-password: ${{ secrets.DOCKERHUB_TOKEN }}
+          dockerhub-repo: anthonymsen/mmt
+          dest-registry: ccr.ccs.tencentyun.com
           dest-repo: anthonymsen/mmt
           dry-run: false
