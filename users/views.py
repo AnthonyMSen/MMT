@@ -1,4 +1,3 @@
-from helpers import AuthorRequiredMixin, get_page_list
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth import get_user_model
@@ -8,11 +7,12 @@ from django.shortcuts import *
 from django.views import generic
 from ratelimit.decorators import ratelimit
 
+from helpers import AuthorRequiredMixin, get_page_list
+from .forms import ProfileForm, SignUpForm, UserLoginForm, ChangePwdForm, SubscribeForm, FeedbackForm
 from .models import Feedback
 
-from .forms import ProfileForm, SignUpForm, UserLoginForm, ChangePwdForm, SubscribeForm, FeedbackForm
-
 User = get_user_model()
+
 
 def login(request):
     if request.method == 'POST':
@@ -32,7 +32,8 @@ def login(request):
         next = request.GET.get('next', '/')
         form = UserLoginForm()
     print(next)
-    return render(request, 'registration/login.html', {'form': form, 'next':next})
+    return render(request, 'registration/login.html', {'form': form, 'next': next})
+
 
 def signup(request):
     if request.method == 'POST':
@@ -78,7 +79,7 @@ def change_password(request):
     })
 
 
-class ProfileView(LoginRequiredMixin,AuthorRequiredMixin, generic.UpdateView):
+class ProfileView(LoginRequiredMixin, AuthorRequiredMixin, generic.UpdateView):
     model = User
     form_class = ProfileForm
     template_name = 'users/profile.html'
@@ -88,7 +89,7 @@ class ProfileView(LoginRequiredMixin,AuthorRequiredMixin, generic.UpdateView):
         return reverse('users:profile', kwargs={'pk': self.request.user.pk})
 
 
-class SubscribeView(LoginRequiredMixin,AuthorRequiredMixin, generic.UpdateView):
+class SubscribeView(LoginRequiredMixin, AuthorRequiredMixin, generic.UpdateView):
     model = User
     form_class = SubscribeForm
     template_name = 'users/subscribe.html'
@@ -97,8 +98,8 @@ class SubscribeView(LoginRequiredMixin,AuthorRequiredMixin, generic.UpdateView):
         messages.success(self.request, "保存成功")
         return reverse('users:subscribe', kwargs={'pk': self.request.user.pk})
 
-class FeedbackView(LoginRequiredMixin, generic.CreateView):
 
+class FeedbackView(LoginRequiredMixin, generic.CreateView):
     model = Feedback
     form_class = FeedbackForm
     template_name = 'users/feedback.html'
@@ -115,6 +116,7 @@ class FeedbackView(LoginRequiredMixin, generic.CreateView):
         messages.success(self.request, "提交成功")
         return reverse('users:feedback')
 
+
 class CollectListView(generic.ListView):
     model = User
     template_name = 'users/collect_videos.html'
@@ -128,6 +130,7 @@ class CollectListView(generic.ListView):
         page_list = get_page_list(paginator, page)
         context['page_list'] = page_list
         return context
+
     def get_queryset(self):
         user = get_object_or_404(User, pk=self.kwargs.get('pk'))
         videos = user.collected_videos.all()
