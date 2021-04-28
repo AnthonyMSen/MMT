@@ -61,9 +61,10 @@ services:
       - ALLOWED_HOSTS=['xxx.xxx.com', '192.168.5.10']
       - EMAIL_USE_SSL=True
       - EMAIL_HOST='smtp.163.com'
-      - EMAIL_PORT=21
+      - EMAIL_PORT=465
       - EMAIL_HOST_USER='xxxx@163.com'
       - EMAIL_HOST_PASSWORD='xxxxxxx'
+      - SITE_URL='http://xxx.xxx.xxx'
 ```
 
 #### Docker命令行部署
@@ -80,6 +81,7 @@ docker create \
 -e EMAIL_PORT=21 \
 -e EMAIL_HOST_USER='xxxx@163.com' \
 -e EMAIL_HOST_PASSWORD='xxxxx' \
+-e SITE_URL='http://xxx.xxx.xxx' \
 anthonymsen/mmt
 ```
 
@@ -102,6 +104,7 @@ EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 21
 EMAIL_HOST_USER = 'xxxx@163.com'
 EMAIL_HOST_PASSWORD = 'xxxxxxx'
+SITE_URL = 'http://xxx.xxx.xxx'
 ```
 
 - 初始化数据库

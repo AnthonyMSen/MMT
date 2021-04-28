@@ -5,7 +5,6 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import *
 from django.views import generic
-from ratelimit.decorators import ratelimit
 
 from helpers import AuthorRequiredMixin, get_page_list
 from .forms import ProfileForm, SignUpForm, UserLoginForm, ChangePwdForm, SubscribeForm, FeedbackForm
@@ -104,7 +103,7 @@ class FeedbackView(LoginRequiredMixin, generic.CreateView):
     form_class = FeedbackForm
     template_name = 'users/feedback.html'
 
-    @ratelimit(key='ip', rate='2/m')
+    # @ratelimit(key='ip', rate='2/m')
     def post(self, request, *args, **kwargs):
         was_limited = getattr(request, 'limited', False)
         if was_limited:
