@@ -25,7 +25,6 @@ SECRET_KEY = 'mr%cahe1ha%c=f$!4_8pfe0vrkb7%^pwrg86w5*l32h0-%oae='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['school.msen.site', '192.168.5.10']
 
 # Application definition
 
@@ -75,11 +74,6 @@ CHUNKED_UPLOAD_MAX_BYTES = 100000000
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # 邮件配置
-EMAIL_USE_SSL = True
-EMAIL_HOST = 'smtp.163.com'
-EMAIL_PORT = 21
-EMAIL_HOST_USER = 'anthony_omv@163.com'
-EMAIL_HOST_PASSWORD = 'QNONXVYOHFWIKFDS'
 
 TEMPLATES = [
     {
